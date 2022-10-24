@@ -74,7 +74,7 @@ def from_graph_to_adjacency_list(graph: nx.Graph) -> dict:
     return result
 
 
-def prims(graph: nx.Graph, root: int = 0) -> list:
+def prims(graph: nx.Graph, root: int = 0) -> tuple:
     """
     Function of using Prim's method to find Minimum Spanning Trees
 
@@ -82,11 +82,12 @@ def prims(graph: nx.Graph, root: int = 0) -> list:
     :param root: root of tree
     :type graph: nx.Graph
     :type root: int
-    :return: list of edges of Minimum Spanning Trees
-    :rtype: list
+    :return: weights sum of Minimum Spanning Trees, list of edges of Minimum Spanning Trees
+    :rtype: tuple
     """
 
     result = []
+    weights_sum = 0
     visited = [root]
     adjacency_list = from_graph_to_adjacency_list(graph)
 
@@ -99,12 +100,13 @@ def prims(graph: nx.Graph, root: int = 0) -> list:
         if e2 not in visited:
             visited.append(e2)
             result.append((e1, e2))
+            weights_sum = w
 
             for next_edge in adjacency_list[e2]:
                 if next_edge[2] not in visited:
                     adjacent_vertexs_edges.append(next_edge)
 
-    return result
+    return weights_sum, result
 
 
 # Graph generating
@@ -120,10 +122,11 @@ nx.draw(my_graph, pos=nx.shell_layout(my_graph), with_labels=True, font_size=10,
 nx.draw_networkx_edge_labels(my_graph, pos=nx.shell_layout(my_graph), edge_labels=edge_labels, font_size=5)
 plt.show()
 
-min_tree_edges = prims(my_graph)
+weight_sum, min_tree_edges = prims(my_graph)
+print(f"Weights sum of Minimum Spanning Trees of my graph: {weight_sum}")
 edges = my_graph.edges
 
-print(min_tree_edges, '\n')
+print(f"Minimum Spanning Trees of my graph: {min_tree_edges}", '\n')
 
 edges_colors = []
 
