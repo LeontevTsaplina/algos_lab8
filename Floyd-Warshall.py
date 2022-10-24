@@ -2,7 +2,6 @@ import random
 import networkx as nx
 import matplotlib.pyplot as plt
 import time
-from memory_profiler import memory_usage
 from statistics import mean
 
 
@@ -68,7 +67,6 @@ plt.show()
 
 # Algorithm researching
 prims_times = []
-prims_memory = []
 
 for _ in range(10):
     current_root = random.randint(0, my_vertices_count - 1)
@@ -76,7 +74,5 @@ for _ in range(10):
     nx.floyd_warshall(my_graph)
     end_time = time.perf_counter()
     prims_times.append(end_time - start_time)
-    #memory_usage((prims, (my_graph, current_root, )), backend="psutil")
 
 print(f"Average method's time: {mean(prims_times)}s")
-#print(f"Average method's memory usage: {mean(prims_memory)}Mb")
