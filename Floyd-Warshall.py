@@ -89,13 +89,13 @@ except:
 print()
 
 # Algorithm researching
-prims_times = []
+floyd_times = []
 
 for _ in range(10):
     current_root = random.randint(0, my_vertices_count - 1)
     start_time = time.perf_counter()
     nx.floyd_warshall(my_graph)
     end_time = time.perf_counter()
-    prims_times.append(end_time - start_time)
+    floyd_times.append(end_time - start_time)
 
-print(f"Average method's time: {mean(prims_times)}s")
+print(f"Average method's time: {mean(floyd_times)}s")
