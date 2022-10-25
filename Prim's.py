@@ -111,7 +111,7 @@ def prims(graph: nx.Graph, root: int = 0) -> tuple:
 
 # Graph generating
 my_vertices_count = 20
-my_edges_count = 74
+my_edges_count = 37
 
 my_graph = random_graph(my_vertices_count, my_edges_count)
 
